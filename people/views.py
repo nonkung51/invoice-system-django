@@ -13,13 +13,30 @@ class PeopleView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
+        if self.request.GET.get("delete_id"):
+            try:
+                People.objects.filter(
+                    id_number=self.request.GET.get("delete_id")
+                ).delete()
+            except:
+                pass
         people = People.objects.all()
         output = []
         for indv in people:
-            output.append({
-                "id": indv.id_number,
-                "name": indv.name,
-                "address": indv.address,
-                "tel": indv.tel
-            })
+            output.append(
+                {
+                    "id": indv.id_number,
+                    "name": indv.name,
+                    "address": indv.address,
+                    "tel": indv.tel,
+                }
+            )
         return Response(output)
+
+    def post(self, request, format=None):
+        serializer = PeopleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
