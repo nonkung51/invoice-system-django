@@ -1,2 +1,6 @@
 db.sqlite3
 invoice/__pycache__
+api/__pycache__
+api/migrations
+people/__pycache__
+people/migrations
