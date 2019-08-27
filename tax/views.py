@@ -8,16 +8,19 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Bill, Field
 import json
 
+
 class BillView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
-        if request.method == 'POST':
+        if request.method == "POST":
             json_data = json.loads(request.body)
-            bill = Bill(people_id=json_data['people_id'], name=json_data['name'])
+            bill = Bill(people_id=json_data["people_id"], name=json_data["name"])
             bill.save()
-            for field in json_data['fields']:
-                Field(field_name=field["name"], field_value=field["value"], bill=bill).save()
+            for field in json_data["fields"]:
+                Field(
+                    field_name=field["name"], field_value=field["value"], bill=bill
+                ).save()
 
         return Response(json_data)
 

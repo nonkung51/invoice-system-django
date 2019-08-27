@@ -13,6 +13,7 @@ class PeopleView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
+        # attach ?delete_id=<id_of_people> to delete
         if self.request.GET.get("delete_id"):
             try:
                 People.objects.filter(

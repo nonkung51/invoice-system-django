@@ -4,11 +4,10 @@ from rest_framework.decorators import api_view
 from rest_framework import permissions
 from rest_framework import status
 from django.http import Http404
-from .serializers import (
-    UserSerializer
-)
+from .serializers import UserSerializer
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 def create_user(request):
     serialized = UserSerializer(data=request.data)
     if serialized.is_valid():

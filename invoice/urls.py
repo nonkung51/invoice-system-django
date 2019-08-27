@@ -19,11 +19,13 @@ from django.urls import path, include
 from people.views import PeopleView
 from tax.views import BillView
 from proof.views import ApproveView
+from printer.views import PrintView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('people/', PeopleView.as_view()),
-    path('tax/', BillView.as_view()),
-    path('approve/', ApproveView.as_view())
+    path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
+    path("people/", PeopleView.as_view()),
+    path("tax/", BillView.as_view()),
+    path("approve/", ApproveView.as_view()),
+    path("print/", PrintView.as_view()),
 ]

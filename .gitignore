@@ -8,3 +8,5 @@ tax/__pycache__
 tax/migrations
 proof/__pycache__
 proof/migrations
+printer/__pycache__
+printer/migrations
